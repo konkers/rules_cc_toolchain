@@ -52,17 +52,17 @@ def rules_cc_toolchain_deps():
     # Required by: rules_cc_toolchain, rules_cc_toolchain_config.
     # Required by modules: cc_toolchain.
     if "debian_stretch_amd64_sysroot" not in native.existing_rules():
-        native.local_repository(
-            name = "debian_stretch_amd64_sysroot",
-            path = "../clang_sysroot",
-            # build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
-        )
-        #http_archive(
+        #native.local_repository(
         #    name = "debian_stretch_amd64_sysroot",
-        #    sha256 = "84656a6df544ecef62169cfe3ab6e41bb4346a62d3ba2a045dc5a0a2ecea94a3",
-        #    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2202c161310ffde63729f29d27fe7bb24a0bc540/debian_stretch_amd64_sysroot.tar.xz"],
-        #    build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
+        #    path = "../clang_sysroot",
+        #    # build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
         #)
+        http_archive(
+            name = "debian_stretch_amd64_sysroot",
+            sha256 = "84656a6df544ecef62169cfe3ab6e41bb4346a62d3ba2a045dc5a0a2ecea94a3",
+            urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2202c161310ffde63729f29d27fe7bb24a0bc540/debian_stretch_amd64_sysroot.tar.xz"],
+            build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
+        )
 
     # Setup rules_cc for toolchain rules.
     # Required by: rules_cc_toolchain.
