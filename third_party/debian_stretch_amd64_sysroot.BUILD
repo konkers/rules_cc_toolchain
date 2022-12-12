@@ -74,6 +74,20 @@ cc_toolchain_import(
 )
 
 cc_toolchain_import(
+    name = "util",
+    additional_libs = [
+        "lib/x86_64-linux-gnu/libutil-2.24.so",
+        "lib/x86_64-linux-gnu/libutil.so.1",
+    ],
+    shared_library = "usr/lib/x86_64-linux-gnu/libutil.so",
+    static_library = "usr/lib/x86_64-linux-gnu/libutil.a",
+    target_compatible_with = select({
+        "@platforms//os:linux": ["@platforms//cpu:x86_64"],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+)
+
+cc_toolchain_import(
     name = "dynamic_linker",
     additional_libs = [
         "lib64/ld-linux-x86-64.so.2",
@@ -154,6 +168,7 @@ cc_toolchain_import(
         ":gcc",
         ":math",
         ":mvec",
+        ":util",
         "@rules_cc_toolchain_config//:compiler_rt",
     ],
 )

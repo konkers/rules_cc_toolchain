@@ -22,13 +22,20 @@ def rules_cc_toolchain_deps():
     # Setup clang compiler files.
     # Required by: rules_cc_toolchain.
     # Used by modules: cc_toolchain.
-    if "clang_llvm_12_00_x86_64_linux_gnu_ubuntu_16_04" not in native.existing_rules():
+    if "clang_llvm_14_00_x86_64_linux_gnu_ubuntu_18_04" not in native.existing_rules():
+        #http_archive(
+        #    name = "clang_llvm_12_00_x86_64_linux_gnu_ubuntu_16_04",
+        #    url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz",
+        #    sha256 = "9694f4df031c614dbe59b8431f94c68631971ad44173eecc1ea1a9e8ee27b2a3",
+        #    build_file = "@rules_cc_toolchain//third_party:clang_llvm_12_00_x86_64_linux_gnu_ubuntu_16_04.BUILD",
+        #    strip_prefix = "clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-16.04",
+        #)
         http_archive(
-            name = "clang_llvm_12_00_x86_64_linux_gnu_ubuntu_16_04",
-            url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz",
-            sha256 = "9694f4df031c614dbe59b8431f94c68631971ad44173eecc1ea1a9e8ee27b2a3",
-            build_file = "@rules_cc_toolchain//third_party:clang_llvm_12_00_x86_64_linux_gnu_ubuntu_16_04.BUILD",
-            strip_prefix = "clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-16.04",
+            name = "clang_llvm_14_00_x86_64_linux_gnu_ubuntu_18_04",
+            url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz",
+            sha256 = "61582215dafafb7b576ea30cc136be92c877ba1f1c31ddbbd372d6d65622fef5",
+            build_file = "@rules_cc_toolchain//third_party:clang_llvm_14_00_x86_64_linux_gnu_ubuntu_18_04.BUILD",
+            strip_prefix = "clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04",
         )
 
     # Setup os normalisation tools.
@@ -45,12 +52,17 @@ def rules_cc_toolchain_deps():
     # Required by: rules_cc_toolchain, rules_cc_toolchain_config.
     # Required by modules: cc_toolchain.
     if "debian_stretch_amd64_sysroot" not in native.existing_rules():
-        http_archive(
+        native.local_repository(
             name = "debian_stretch_amd64_sysroot",
-            sha256 = "84656a6df544ecef62169cfe3ab6e41bb4346a62d3ba2a045dc5a0a2ecea94a3",
-            urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2202c161310ffde63729f29d27fe7bb24a0bc540/debian_stretch_amd64_sysroot.tar.xz"],
-            build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
+            path = "../clang_sysroot",
+            # build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
         )
+        #http_archive(
+        #    name = "debian_stretch_amd64_sysroot",
+        #    sha256 = "84656a6df544ecef62169cfe3ab6e41bb4346a62d3ba2a045dc5a0a2ecea94a3",
+        #    urls = ["https://commondatastorage.googleapis.com/chrome-linux-sysroot/toolchain/2202c161310ffde63729f29d27fe7bb24a0bc540/debian_stretch_amd64_sysroot.tar.xz"],
+        #    build_file = "@rules_cc_toolchain//third_party:debian_stretch_amd64_sysroot.BUILD",
+        #)
 
     # Setup rules_cc for toolchain rules.
     # Required by: rules_cc_toolchain.
